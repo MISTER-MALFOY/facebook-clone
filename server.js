@@ -9,7 +9,6 @@ const port = 3000;
 // Middleware
 app.use(cors()); // Allow requests from the frontend
 app.use(bodyParser.json()); // Parse JSON data
-app.use(express.static('public'));
 
 
 // Database connection
